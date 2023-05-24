@@ -1,4 +1,13 @@
 package com.example.photoeditor.photo_classes
 
-class SharpnessEffect : IEffect {
+import android.graphics.Bitmap
+
+class SharpnessEffect(override val type: EffectType,
+                      override val name: String,
+                      private val value: Float) : IEffect {
+
+    override fun modifyPhoto(bitmap: Bitmap) {
+        TODO("Not yet implemented")
+    }
+
 }

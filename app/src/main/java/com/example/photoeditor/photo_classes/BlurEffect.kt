@@ -1,4 +1,13 @@
 package com.example.photoeditor.photo_classes
 
-class BlurEffect : IEffect {
+import android.graphics.Bitmap
+
+class BlurEffect(override val type: EffectType,
+                 override val name: String,
+                 private val value: Int) : IEffect {
+
+    override fun modifyPhoto(bitmap: Bitmap) {
+        TODO("Not yet implemented")
+    }
+
 }
