@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        app:srcCompat="@drawable/empty_view" />
+        android:scaleType="fitXY"
+        android:src="@drawable/empty_view"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_menu"
