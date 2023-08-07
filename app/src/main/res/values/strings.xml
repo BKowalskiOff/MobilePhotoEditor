@@ -3,4 +3,12 @@
     <string name="temp_images_dir">temp_images</string>
     <string name="temp_image">temp_image.jpg</string>
     <string name="authorities">com.example.fileprovider</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="brightness">Jasność</string>
+    <string name="sharpness">Ostrość</string>
+    <string name="blur">Rozmycie</string>
+    <string name="contrast">Kontrast</string>
+    <string name="colour_balance">Balans \nkolorów</string>
+    <string name="gamma_correction">Korekcja gamma</string>
 </resources>

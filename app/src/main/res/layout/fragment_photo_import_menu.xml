@@ -27,7 +27,7 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/button_take_picture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -42,7 +42,7 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/button_choose_picture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"

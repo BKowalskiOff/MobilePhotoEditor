@@ -6,10 +6,11 @@ import android.graphics.BitmapFactory
 class Photo {
 
 private val effects: MutableList<IEffect> = mutableListOf<IEffect>()
-var bitmap: Bitmap? = null
+var original: Bitmap? = null
+var preview: Bitmap? = null
 
     constructor(bitmap: Bitmap?) {
-        this.bitmap = bitmap
+        this.original = bitmap
     }
 
     fun applyEffects(){

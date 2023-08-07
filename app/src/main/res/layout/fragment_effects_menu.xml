@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menu_background_dark_grey"
+    android:orientation="vertical"
+    tools:context=".EffectsMenu"
+    tools:showIn="@layout/activity_main">
+
+    <androidx.legacy.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_brightness"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/brightness"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+            <Button
+                android:id="@+id/button_sharpness"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/sharpness"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+
+            <Button
+                android:id="@+id/button_blur"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/blur"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+
+            <Button
+                android:id="@+id/button_contrast"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/contrast"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+            <Button
+                android:id="@+id/button_colour_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/colour_balance"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+            <Button
+                android:id="@+id/button_gamma_correction"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="@string/gamma_correction"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <androidx.legacy.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

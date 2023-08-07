@@ -87,10 +87,10 @@ class PhotoImportMenu : Fragment() {
             photoSelectedListener.onFileSelected(bm)
         }
 
-        binding.button7.setOnClickListener{
+        binding.buttonChoosePicture.setOnClickListener{
             photoChooserLauncher.launch(PickVisualMediaRequest())
         }
-        binding.button6.setOnClickListener{
+        binding.buttonTakePicture.setOnClickListener{
             cameraLauncher.launch(tempUri)
         }
 
