@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
 
     override fun onEffectSelected(effect: EffectType) {
         supportFragmentManager.beginTransaction().apply{
-            add(binding.fcvMenu.id, EffectConfig.newInstance(effect.ordinal))
+            add(binding.fcvMenu.id, EffectConfig.newInstance(effect))
             addToBackStack(null)
             commit()
         }

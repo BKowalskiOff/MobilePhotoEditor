@@ -11,9 +11,9 @@ class IEffectFactory {
             else -> null
         }
     }
-    fun createEffect(type: EffectType, values: List<Int>): IEffect?{
+    fun createEffect(type: EffectType, rValue: Int, gValue: Int, bValue: Int): IEffect?{
         return when(type){
-            EffectType.COLOUR_BALANCE -> ColourBalanceEffect(type, "Colour balance", values[0], values[1], values[2])
+            EffectType.COLOUR_BALANCE -> ColourBalanceEffect(type, "Colour balance", rValue, bValue, gValue)
             else -> null
         }
     }
