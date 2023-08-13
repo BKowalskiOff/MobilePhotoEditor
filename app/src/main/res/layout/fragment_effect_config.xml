@@ -13,15 +13,17 @@
         android:id="@+id/textView_effect_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         android:padding="4sp"
-        android:text=""
+        android:text="Effect type"
         android:textColor="@color/menu_button_text_dark_grey"
         android:textFontWeight="5"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar_effect_val"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <SeekBar
         android:id="@+id/seekBar_effect_val"
@@ -36,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <ProgressBar
         android:id="@+id/progressBar_processing_image"
@@ -67,12 +69,10 @@
 
     <Button
         android:id="@+id/button_revert"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_marginEnd="64dp"
         android:backgroundTint="@color/menu_background_darker_grey"
-        android:textSize="24dp"
         android:text="@string/revert"
         android:textAllCaps="false"
         android:textColor="@color/menu_button_text_dark_grey"
@@ -80,16 +80,16 @@
         app:layout_constraintEnd_toStartOf="@+id/button_accept"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/button_accept"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintDimensionRatio="1:1"
         android:layout_marginStart="64dp"
         android:backgroundTint="@color/menu_background_darker_grey"
-        android:textSize="24dp"
         android:text="@string/accept"
         android:textAllCaps="false"
         android:textColor="@color/menu_button_text_dark_grey"
@@ -97,7 +97,58 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_revert"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        tools:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/button_red"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:text=""
+        android:backgroundTint="#dd0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/button_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/button_green"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:text=""
+        android:backgroundTint="#00dd00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/button_blue"
+        app:layout_constraintStart_toEndOf="@id/button_red"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/button_blue"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="128dp"
+        android:visibility="gone"
+        android:text=""
+        android:backgroundTint="#0000dd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_green"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

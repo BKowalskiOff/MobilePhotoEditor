@@ -11,6 +11,6 @@
     <string name="colour_balance">Balans \nkolorów</string>
     <string name="gamma_correction">Korekcja gamma</string>
     <string name="apply">Zastosuj</string>
-    <string name="revert">X</string>
-    <string name="accept">V</string>
+    <string name="revert">Cofnij</string>
+    <string name="accept">Zatwierdź</string>
 </resources>

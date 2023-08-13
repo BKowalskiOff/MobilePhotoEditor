@@ -14,6 +14,7 @@ import com.example.photoeditor.photo_classes.EffectType
 import com.example.photoeditor.photo_classes.IEffect
 import com.example.photoeditor.photo_classes.IEffectFactory
 import kotlinx.coroutines.runBlocking
+import kotlin.math.max
 
 interface EffectConfigApplyListener{
     fun onEffectConfigApply(effect: IEffect)
@@ -75,42 +76,65 @@ class EffectConfig : Fragment() {
         binding.buttonRevert.setOnClickListener {
             effectConfigRevertListener.onEffectConfigRevert()
         }
-        if (param1 == EffectType.SHARPNESS){
-            binding.seekBarEffectVal.visibility = View.GONE
-            binding.buttonApply.visibility = View.VISIBLE
-            binding.buttonApply.setOnClickListener {
-                IEffectFactory().createEffect(param1!!)?.let {
-                    effectConfigApplyListener.onEffectConfigApply(it)
-                }
-            }
-            return
-        }
-        binding.seekBarEffectVal.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                when(param1){
-                EffectType.COLOUR_BALANCE -> {}
-                EffectType.CONTRAST,
-                EffectType.BLUR,
-                EffectType.BRIGHTNESS,
-                EffectType.SHARPNESS,
-                EffectType.GAMMA_CORRECTION -> {
-                    IEffectFactory().createEffect(param1!!, seekBar!!.progress)?.let {
+        when(param1){
+            EffectType.SHARPNESS -> {
+                binding.seekBarEffectVal.visibility = View.GONE
+                binding.buttonApply.visibility = View.VISIBLE
+                binding.buttonApply.setOnClickListener {
+                    IEffectFactory().createEffect(param1!!)?.let {
                         effectConfigApplyListener.onEffectConfigApply(it)
                     }
                 }
-                else -> {}
+            }
+            EffectType.COLOUR_BALANCE -> {
+                binding.buttonRed.visibility = View.VISIBLE
+                binding.buttonGreen.visibility = View.VISIBLE
+                binding.buttonBlue.visibility = View.VISIBLE
+
+                binding.buttonRed.setOnClickListener {
+                    binding.buttonGreen.visibility = View.INVISIBLE
+                    binding.buttonBlue.visibility = View.INVISIBLE
+                }
+                binding.buttonGreen.setOnClickListener {
+                    binding.buttonRed.visibility = View.INVISIBLE
+                    binding.buttonBlue.visibility = View.INVISIBLE
+                }
+                binding.buttonBlue.setOnClickListener {
+                    binding.buttonRed.visibility = View.INVISIBLE
+                    binding.buttonGreen.visibility = View.INVISIBLE
                 }
             }
-        })
-    }
+            else -> {
+                binding.seekBarEffectVal.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+                    override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+
+                    }
+
+                    override fun onStartTrackingTouch(p0: SeekBar?) {
+
+                    }
+
+                    override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                        when(param1){
+                            EffectType.COLOUR_BALANCE -> {}
+                            EffectType.CONTRAST,
+                            EffectType.BLUR,
+                            EffectType.BRIGHTNESS,
+                            EffectType.SHARPNESS,
+                            EffectType.GAMMA_CORRECTION -> {
+                                IEffectFactory().createEffect(param1!!, seekBar!!.progress)?.let {
+                                    effectConfigApplyListener.onEffectConfigApply(it)
+                                }
+                            }
+                            else -> {}
+                        }
+                    }
+                })
+
+            }
+        }
+
+        }
 
     companion object {
         /**
