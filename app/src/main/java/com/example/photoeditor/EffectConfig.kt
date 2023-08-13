@@ -19,6 +19,13 @@ interface EffectConfigApplyListener{
     fun onEffectConfigApply(effect: IEffect)
 }
 
+interface EffectConfigAcceptListener{
+    fun onEffectConfigAccept()
+}
+interface EffectConfigRevertListener{
+    fun onEffectConfigRevert()
+}
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -35,6 +42,8 @@ class EffectConfig : Fragment() {
     private lateinit var binding: FragmentEffectConfigBinding
     private lateinit var effect: IEffect
     private lateinit var effectConfigApplyListener: EffectConfigApplyListener
+    private lateinit var effectConfigAcceptListener: EffectConfigAcceptListener
+    private lateinit var effectConfigRevertListener: EffectConfigRevertListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +62,19 @@ class EffectConfig : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         effectConfigApplyListener = context as EffectConfigApplyListener
+        effectConfigAcceptListener = context as EffectConfigAcceptListener
+        effectConfigRevertListener = context as EffectConfigRevertListener
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewEffectType.text = param1?.let {  EffectType.names[it.ordinal]}
+        binding.buttonAccept.setOnClickListener {
+            effectConfigAcceptListener.onEffectConfigAccept()
+        }
+        binding.buttonRevert.setOnClickListener {
+            effectConfigRevertListener.onEffectConfigRevert()
+        }
         if (param1 == EffectType.SHARPNESS){
             binding.seekBarEffectVal.visibility = View.GONE
             binding.buttonApply.visibility = View.VISIBLE

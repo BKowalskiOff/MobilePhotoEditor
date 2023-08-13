@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 import kotlin.time.measureTime
 
-class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedListener, EffectConfigApplyListener{
+class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedListener,
+    EffectConfigApplyListener, EffectConfigRevertListener, EffectConfigAcceptListener{
 
     private lateinit var binding: ActivityMainBinding
     private var photo: Photo? = null
@@ -62,15 +63,27 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
     override fun onEffectConfigApply(effect: IEffect){
         try {
             photo?.let { it ->
-                val time = measureTimeMillis {
-                    it.preview =
-                        it.original?.let { originalBitmap -> effect.modifyPhoto(originalBitmap) }
-                }
-                Log.d("TIME", time.toString())
+                it.preview = it.original?.let { originalBitmap -> effect.modifyPhoto(originalBitmap) }
                 it.preview?.let { updateImageView(it) }
             }
         }catch (e: Error){
             Log.d("ERROR", e.toString())
+        }
+    }
+
+    override fun onEffectConfigAccept() {
+        photo!!.preview?.let{
+            photo!!.original = it
+            updateImageView(it)
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    override fun onEffectConfigRevert() {
+        photo!!.original?.let{
+            photo!!.preview = it
+            updateImageView(it)
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
