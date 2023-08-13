@@ -10,25 +10,35 @@ class ContrastEffect(override val type: EffectType,
                      private val value: Int) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
-        val bm = bitmap.copy(bitmap.config, true)
+
+        val width = bitmap.width
+        val height = bitmap.height
+        //allocating two integer arrays, one for input image pixels and one for output image pixels
+        val pixels = IntArray(width * height)
+        val newPixels = IntArray(width * height)
+        //filling input image array with pixel values from the bitmap
+        bitmap.getPixels(pixels,0, width, 0, 0, width, height)
         val coef = getCoefficient()
-        for(y in 0 until bm.height){
-            for(x in 0 until bm.width){
-                val colour = bm.getPixel(x,y)
+        for(y in 0 until height){
+            for(x in 0 until width){
+                val colour = pixels[y*width + x]
                 var red = (coef*(Color.red(colour).toFloat()-128f)+128f).toInt()
                 red = clip(red)
                 var green = (coef*(Color.green(colour).toFloat()-128f) + 128f).toInt()
                 red = clip(red)
                 var blue = (coef*(Color.blue(colour).toFloat()-128f)+128f).toInt()
                 red = clip(red)
-                bm.setPixel(x,y, Color.rgb(red,green,blue))
+                newPixels[y*width + x] = Color.rgb(red,green,blue)
             }
         }
-        return bm
+        // creating an output bitmap with calculated pixels
+        val newBitmap = Bitmap.createBitmap(width, height, bitmap.config)
+        newBitmap.setPixels(newPixels, 0, width, 0, 0, width, height)
+        return newBitmap
     }
 
     private fun getCoefficient(): Float{
-        return 2f*value.toFloat()/1023f
+        return 1.5f*value.toFloat()/1023f
     }
 
     private fun clip(value: Int): Int{

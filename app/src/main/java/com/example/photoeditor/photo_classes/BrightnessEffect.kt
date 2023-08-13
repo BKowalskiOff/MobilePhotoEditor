@@ -3,31 +3,48 @@ package com.example.photoeditor.photo_classes
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class BrightnessEffect(override val type: EffectType,
                        override val name: String,
                        private val value: Int) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
-        val bm = bitmap.copy(bitmap.config, true)
+
+        val width = bitmap.width
+        val height = bitmap.height
+        //allocating two integer arrays, one for input image pixels and one for output image pixels
+        val pixels = IntArray(width * height)
+        val newPixels = IntArray(width * height)
+        //filling input image array with pixel values from the bitmap
+        bitmap.getPixels(pixels,0, width, 0, 0, width, height)
         val coef = getCoefficient()
-        for(y in 0 until bm.height){
-            for(x in 0 until bm.width){
-                val colour = bm.getPixel(x,y)
-                val red = clip(Color.red(colour) + coef)
-                val green = clip(Color.green(colour) + coef)
-                val blue = clip(Color.blue(colour) + coef)
-                bm.setPixel(x,y,Color.rgb(red,green,blue))
+        runBlocking(Dispatchers.Default) {
+            for (y in 0 until height) {
+                launch {
+                    for (x in 0 until width) {
+                        val colour = pixels[y * width + x]
+                        val red = truncate(Color.red(colour) + coef)
+                        val green = truncate(Color.green(colour) + coef)
+                        val blue = truncate(Color.blue(colour) + coef)
+                        newPixels[y * width + x] = Color.rgb(red, green, blue)
+                    }
+                }
             }
         }
-        return bm
+        // creating an output bitmap with calculated pixels
+        val newBitmap = Bitmap.createBitmap(width, height, bitmap.config)
+        newBitmap.setPixels(newPixels, 0, width, 0, 0, width, height)
+        return newBitmap
     }
 
     fun getCoefficient(): Int{
         return -255 + (this.value * 510)/1023
     }
 
-    fun clip(value: Int): Int{
+    fun truncate(value: Int): Int{
         if(value < 0) return 0
         if(value > 255) return 255
         return value

@@ -2,6 +2,7 @@ package com.example.photoeditor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.photoeditor.databinding.FragmentEffectConfigBinding
 import com.example.photoeditor.photo_classes.EffectType
 import com.example.photoeditor.photo_classes.IEffect
 import com.example.photoeditor.photo_classes.IEffectFactory
+import kotlinx.coroutines.runBlocking
 
 interface EffectConfigApplyListener{
     fun onEffectConfigApply(effect: IEffect)
@@ -56,6 +58,16 @@ class EffectConfig : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewEffectType.text = param1?.let {  EffectType.names[it.ordinal]}
+        if (param1 == EffectType.SHARPNESS){
+            binding.seekBarEffectVal.visibility = View.GONE
+            binding.buttonApply.visibility = View.VISIBLE
+            binding.buttonApply.setOnClickListener {
+                IEffectFactory().createEffect(param1!!)?.let {
+                    effectConfigApplyListener.onEffectConfigApply(it)
+                }
+            }
+            return
+        }
         binding.seekBarEffectVal.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
 
@@ -67,19 +79,18 @@ class EffectConfig : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 when(param1){
-                    EffectType.COLOUR_BALANCE -> {}
-                    EffectType.CONTRAST,
-                    EffectType.BLUR,
-                    EffectType.BRIGHTNESS,
-                    EffectType.SHARPNESS,
-                    EffectType.GAMMA_CORRECTION -> {
-                        IEffectFactory().createEffect(param1!!, seekBar!!.progress)?.let {
-                            effectConfigApplyListener.onEffectConfigApply(it)
-                        }
+                EffectType.COLOUR_BALANCE -> {}
+                EffectType.CONTRAST,
+                EffectType.BLUR,
+                EffectType.BRIGHTNESS,
+                EffectType.SHARPNESS,
+                EffectType.GAMMA_CORRECTION -> {
+                    IEffectFactory().createEffect(param1!!, seekBar!!.progress)?.let {
+                        effectConfigApplyListener.onEffectConfigApply(it)
                     }
-                    else -> {}
                 }
-
+                else -> {}
+                }
             }
         })
     }

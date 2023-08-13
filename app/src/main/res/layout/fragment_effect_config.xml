@@ -13,11 +13,11 @@
         android:id="@+id/textView_effect_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="24sp"
-        android:textFontWeight="5"
-        android:textColor="@color/menu_button_text_dark_grey"
         android:padding="4sp"
+        android:text=""
+        android:textColor="@color/menu_button_text_dark_grey"
+        android:textFontWeight="5"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/seekBar_effect_val"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:indeterminate="false"
-        android:max="1024"
+        android:max="1023"
         android:progress="512"
         android:progressTint="@android:color/transparent"
         android:thumb="@drawable/thumb_image"
@@ -37,6 +37,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_processing_image"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/menu_background_darker_grey"
+        android:text="@string/apply"
+        android:textAllCaps="false"
+        android:textColor="@color/menu_button_text_dark_grey"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar_effect_val"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_effect_type"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button_revert"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginEnd="64dp"
+        android:backgroundTint="@color/menu_background_darker_grey"
+        android:textSize="24dp"
+        android:text="@string/revert"
+        android:textAllCaps="false"
+        android:textColor="@color/menu_button_text_dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_accept"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_accept"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginStart="64dp"
+        android:backgroundTint="@color/menu_background_darker_grey"
+        android:textSize="24dp"
+        android:text="@string/accept"
+        android:textAllCaps="false"
+        android:textColor="@color/menu_button_text_dark_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_revert"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

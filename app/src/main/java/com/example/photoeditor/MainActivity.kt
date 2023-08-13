@@ -8,6 +8,12 @@ import com.example.photoeditor.databinding.ActivityMainBinding
 import com.example.photoeditor.photo_classes.EffectType
 import com.example.photoeditor.photo_classes.IEffect
 import com.example.photoeditor.photo_classes.Photo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.system.measureTimeMillis
+import kotlin.time.measureTime
 
 class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedListener, EffectConfigApplyListener{
 
@@ -18,9 +24,10 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setting the menu fragment container as photo importing fragment
+        //setting the menu fragment container to photo importing fragment
         supportFragmentManager.beginTransaction().apply {
-            replace(binding.fcvMenu.id, PhotoImportMenu())
+            add(binding.fcvMenu.id, PhotoImportMenu())
+            addToBackStack(null)
             commit()
         }
     }
@@ -32,7 +39,8 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
         photo!!.original?.let { updateImageView(it) }
 
         supportFragmentManager.beginTransaction().apply{
-            replace(binding.fcvMenu.id, EffectsMenu())
+            add(binding.fcvMenu.id, EffectsMenu())
+            addToBackStack(null)
             commit()
         }
 
@@ -45,23 +53,25 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
 
     override fun onEffectSelected(effect: EffectType) {
         supportFragmentManager.beginTransaction().apply{
-            replace(binding.fcvMenu.id, EffectConfig.newInstance(effect.ordinal))
+            add(binding.fcvMenu.id, EffectConfig.newInstance(effect.ordinal))
+            addToBackStack(null)
             commit()
         }
     }
 
     override fun onEffectConfigApply(effect: IEffect){
-        //Log.d("TEST", photo!!.preview!!.toString())
         try {
             photo?.let { it ->
-                it.preview = photo!!.original?.let { it1 -> effect.modifyPhoto(it1) }
+                val time = measureTimeMillis {
+                    it.preview =
+                        it.original?.let { originalBitmap -> effect.modifyPhoto(originalBitmap) }
+                }
+                Log.d("TIME", time.toString())
                 it.preview?.let { updateImageView(it) }
             }
         }catch (e: Error){
             Log.d("ERROR", e.toString())
         }
-        Log.d("TEST", photo!!.preview!!.toString())
-
     }
 
 }

@@ -1,9 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PhotoEditor</string>
     <string name="temp_images_dir">temp_images</string>
     <string name="temp_image">temp_image.jpg</string>
     <string name="authorities">com.example.fileprovider</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="brightness">Jasność</string>
     <string name="sharpness">Ostrość</string>
@@ -11,4 +10,7 @@
     <string name="contrast">Kontrast</string>
     <string name="colour_balance">Balans \nkolorów</string>
     <string name="gamma_correction">Korekcja gamma</string>
+    <string name="apply">Zastosuj</string>
+    <string name="revert">X</string>
+    <string name="accept">V</string>
 </resources>
