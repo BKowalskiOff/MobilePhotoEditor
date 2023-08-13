@@ -3,6 +3,7 @@ package com.example.photoeditor.photo_classes
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -42,12 +43,6 @@ class BrightnessEffect(override val type: EffectType,
 
     fun getCoefficient(): Int{
         return -255 + (this.value * 510)/1023
-    }
-
-    fun truncate(value: Int): Int{
-        if(value < 0) return 0
-        if(value > 255) return 255
-        return value
     }
 
 }

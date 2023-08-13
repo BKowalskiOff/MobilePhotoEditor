@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
         setContentView(binding.root)
         //setting the menu fragment container to photo importing fragment
         supportFragmentManager.beginTransaction().apply {
-            add(binding.fcvMenu.id, PhotoImportMenu())
+            replace(binding.fcvMenu.id, PhotoImportMenu())
             addToBackStack(null)
             commit()
         }
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
         photo!!.original?.let { updateImageView(it) }
 
         supportFragmentManager.beginTransaction().apply{
-            add(binding.fcvMenu.id, EffectsMenu())
+            replace(binding.fcvMenu.id, EffectsMenu())
             addToBackStack(null)
             commit()
         }
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
 
     override fun onEffectSelected(effect: EffectType) {
         supportFragmentManager.beginTransaction().apply{
-            add(binding.fcvMenu.id, EffectConfig.newInstance(effect))
+            replace(binding.fcvMenu.id, EffectConfig.newInstance(effect))
             addToBackStack(null)
             commit()
         }

@@ -13,7 +13,7 @@ class IEffectFactory {
     }
     fun createEffect(type: EffectType, rValue: Int, gValue: Int, bValue: Int): IEffect?{
         return when(type){
-            EffectType.COLOUR_BALANCE -> ColourBalanceEffect(type, "Colour balance", rValue, bValue, gValue)
+            EffectType.COLOUR_BALANCE -> ColourBalanceEffect(type, "Colour balance", rValue, gValue, bValue)
             else -> null
         }
     }

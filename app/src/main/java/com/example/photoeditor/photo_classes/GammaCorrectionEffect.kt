@@ -27,14 +27,8 @@ class GammaCorrectionEffect(override val type: EffectType,
         return bm
     }
 
-    fun getCoefficient(): Float{
+    private fun getCoefficient(): Float{
         return 1f/(0.01f + 3f*value.toFloat()/1023f)
-    }
-
-    fun truncate(value: Int): Int{
-        if(value < 0) return 0
-        if(value > 255) return 255
-        return value
     }
 
 }

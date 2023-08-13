@@ -113,7 +113,7 @@ class PhotoImportMenu : Fragment() {
 
         pfd.close()
 
-        return bm
+        return bm.copy(Bitmap.Config.RGB_565, false)
 
     }
 

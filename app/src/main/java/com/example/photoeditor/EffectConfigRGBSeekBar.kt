@@ -38,7 +38,7 @@ class EffectConfigRGBSeekBar : EffectConfig() {
     private var param1: EffectType? = null
     private lateinit var binding: FragmentEffectConfigRgbSeekBarBinding
     private lateinit var effect: IEffect
-    private lateinit var rgbColor: RGBColor
+    private var rgbColor: RGBColor? = null
     private var rValue= 512
     private var gValue= 512
     private var bValue = 512
@@ -103,15 +103,16 @@ class EffectConfigRGBSeekBar : EffectConfig() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
-                when(rgbColor){
-                    RGBColor.RED -> rValue = seekBar!!.progress
-                    RGBColor.GREEN -> gValue = seekBar!!.progress
-                    RGBColor.BLUE -> bValue = seekBar!!.progress
+                rgbColor?.let {
+                    when (it) {
+                        RGBColor.RED -> rValue = seekBar!!.progress
+                        RGBColor.GREEN -> gValue = seekBar!!.progress
+                        RGBColor.BLUE -> bValue = seekBar!!.progress
+                    }
+                    IEffectFactory().createEffect(param1!!, rValue, gValue, bValue)?.let {
+                        effectConfigApplyListener.onEffectConfigApply(it)
+                    }
                 }
-                IEffectFactory().createEffect(param1!!, rValue, gValue, bValue)?.let {
-                    effectConfigApplyListener.onEffectConfigApply(it)
-                }
-
             }
         })
 

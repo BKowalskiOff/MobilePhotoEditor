@@ -23,11 +23,11 @@ class ContrastEffect(override val type: EffectType,
             for(x in 0 until width){
                 val colour = pixels[y*width + x]
                 var red = (coef*(Color.red(colour).toFloat()-128f)+128f).toInt()
-                red = clip(red)
+                red = truncate(red)
                 var green = (coef*(Color.green(colour).toFloat()-128f) + 128f).toInt()
-                red = clip(red)
+                red = truncate(red)
                 var blue = (coef*(Color.blue(colour).toFloat()-128f)+128f).toInt()
-                red = clip(red)
+                red = truncate(red)
                 newPixels[y*width + x] = Color.rgb(red,green,blue)
             }
         }
@@ -41,9 +41,4 @@ class ContrastEffect(override val type: EffectType,
         return 1.5f*value.toFloat()/1023f
     }
 
-    private fun clip(value: Int): Int{
-        if(value < 0) return 0
-        if(value > 255) return 255
-        return value
-    }
 }

@@ -54,9 +54,4 @@ class SharpnessEffect(override val type: EffectType,
         return brightness - avg
     }
 
-    fun truncate(value: Int): Int{
-        if(value < 0) return 0
-        if(value > 255) return 255
-        return value
-    }
 }
