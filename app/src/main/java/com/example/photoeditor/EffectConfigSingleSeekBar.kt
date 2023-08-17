@@ -72,8 +72,16 @@ class EffectConfigSingleSeekBar : EffectConfig() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
-                IEffectFactory().createEffect(param1!!, seekBar!!.progress)?.let {
-                    effectConfigApplyListener.onEffectConfigApply(it)
+                seekBar?.let{
+                    // Normalize seekbar value to range 0.0-1.0 with step: 1/1024
+                    // With that, we get precise values for rgb ranges (0 to 255, -255 to 255),
+                    // some small integer ranges (e.g. blur radius)
+                    // and floating point ranges (e.g. contrast coefficient)
+                    val value = it.progress.toDouble()/it.max
+
+                    IEffectFactory().createEffect(param1!!, value)?.let {
+                        effectConfigApplyListener.onEffectConfigApply(it)
+                    }
                 }
 
             }

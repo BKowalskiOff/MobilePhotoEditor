@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.annotation.FloatRange
 import com.example.photoeditor.databinding.FragmentEffectConfigRgbSeekBarBinding
 import com.example.photoeditor.databinding.FragmentEffectConfigSingleSeekBarBinding
 import com.example.photoeditor.photo_classes.EffectType
@@ -39,9 +41,9 @@ class EffectConfigRGBSeekBar : EffectConfig() {
     private lateinit var binding: FragmentEffectConfigRgbSeekBarBinding
     private lateinit var effect: IEffect
     private var rgbColor: RGBColor? = null
-    private var rValue= 512
-    private var gValue= 512
-    private var bValue = 512
+    private var rValue = 0.5
+    private var gValue = 0.5
+    private var bValue = 0.5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,15 +105,27 @@ class EffectConfigRGBSeekBar : EffectConfig() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
-                rgbColor?.let {
-                    when (it) {
-                        RGBColor.RED -> rValue = seekBar!!.progress
-                        RGBColor.GREEN -> gValue = seekBar!!.progress
-                        RGBColor.BLUE -> bValue = seekBar!!.progress
+                if (rgbColor == null) {
+                    Toast.makeText(context, "Najpierw wybierz kolor", Toast.LENGTH_LONG)
+                    return
+                }
+
+                seekBar?.let {
+                    // Normalize seekbar value to range 0.0-1.0 with step: 1/1024
+                    // With that, we get precise values for rgb ranges (0 to 255, -255 to 255),
+                    // some small integer ranges (e.g. blur radius)
+                    // and floating point ranges (e.g. contrast coefficient)
+                    when (rgbColor!!) {
+                        RGBColor.RED -> rValue = it.progress.toDouble() / it.max
+                        RGBColor.GREEN -> gValue = it.progress.toDouble() / it.max
+                        RGBColor.BLUE -> bValue = it.progress.toDouble() / it.max
                     }
+                    val value = it.progress.toDouble() / it.max
+
                     IEffectFactory().createEffect(param1!!, rValue, gValue, bValue)?.let {
                         effectConfigApplyListener.onEffectConfigApply(it)
                     }
+
                 }
             }
         })

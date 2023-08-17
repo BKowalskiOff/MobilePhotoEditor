@@ -2,7 +2,7 @@ package com.example.photoeditor.photo_classes
 
 class IEffectFactory {
 
-    fun createEffect(type: EffectType, value: Int): IEffect?{
+    fun createEffect(type: EffectType, value: Double): IEffect?{
         return when(type){
             EffectType.BRIGHTNESS -> BrightnessEffect(type, "Brightness", value)
             EffectType.BLUR -> BlurEffect(type, "Blur", value)
@@ -11,7 +11,7 @@ class IEffectFactory {
             else -> null
         }
     }
-    fun createEffect(type: EffectType, rValue: Int, gValue: Int, bValue: Int): IEffect?{
+    fun createEffect(type: EffectType, rValue: Double, gValue: Double, bValue: Double): IEffect?{
         return when(type){
             EffectType.COLOUR_BALANCE -> ColourBalanceEffect(type, "Colour balance", rValue, gValue, bValue)
             else -> null

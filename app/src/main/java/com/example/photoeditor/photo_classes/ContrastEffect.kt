@@ -7,7 +7,7 @@ import android.graphics.Color
 // algorithm from site: https://www.dfstudios.co.uk/articles/programming/image-programming-algorithms/image-processing-algorithms-part-5-contrast-adjustment/
 class ContrastEffect(override val type: EffectType,
                      override val name: String,
-                     private val value: Int) : IEffect {
+                     private val value: Double) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
 
@@ -37,8 +37,9 @@ class ContrastEffect(override val type: EffectType,
         return newBitmap
     }
 
-    private fun getCoefficient(): Float{
-        return 1.5f*value.toFloat()/1023f
+    private fun getCoefficient(): Double{
+        // 0 to 1 -> 0 to 1.5
+        return 1.5*this.value
     }
 
 }

@@ -11,7 +11,7 @@ import kotlin.system.measureTimeMillis
 
 class BlurEffect(override val type: EffectType,
                  override val name: String,
-                 private val value: Int) : IEffect {
+                 private val value: Double) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
 
@@ -42,8 +42,8 @@ class BlurEffect(override val type: EffectType,
     }
 
     fun getRadius(): Int{
-        // 0-1023 -> 3-15
-        return 3 + (this.value * 12)/1023
+        // 0 to 1 -> 3 to 15
+        return (this.value*12).toInt() + 3
     }
 
     private fun calculateBlurredVal(pixels: IntArray, kernel: Array<DoubleArray>, dstX: Int,

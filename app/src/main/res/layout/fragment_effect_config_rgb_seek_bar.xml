@@ -30,7 +30,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:indeterminate="false"
-        android:max="1023"
+        android:max="1024"
         android:progress="512"
         android:progressTint="@android:color/transparent"
         android:thumb="@drawable/thumb_image"

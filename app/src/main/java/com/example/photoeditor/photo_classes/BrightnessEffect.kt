@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 
 class BrightnessEffect(override val type: EffectType,
                        override val name: String,
-                       private val value: Int) : IEffect {
+                       private val value: Double) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
 
@@ -42,7 +42,8 @@ class BrightnessEffect(override val type: EffectType,
     }
 
     fun getCoefficient(): Int{
-        return -255 + (this.value * 510)/1023
+        // 0 to 1 -> -255 to 255
+        return -255 + (this.value * 510).toInt()
     }
 
 }

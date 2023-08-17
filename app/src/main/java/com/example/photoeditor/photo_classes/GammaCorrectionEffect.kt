@@ -6,7 +6,7 @@ import kotlin.math.pow
 
 class GammaCorrectionEffect(override val type: EffectType,
                             override val name: String,
-                            private val value: Int) : IEffect {
+                            private val value: Double) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
         val bm = bitmap.copy(bitmap.config, true)
@@ -28,7 +28,7 @@ class GammaCorrectionEffect(override val type: EffectType,
     }
 
     private fun getCoefficient(): Float{
-        return 1f/(0.01f + 3f*value.toFloat()/1023f)
+        return 1f/(0.01f + 3f*value.toFloat())
     }
 
 }

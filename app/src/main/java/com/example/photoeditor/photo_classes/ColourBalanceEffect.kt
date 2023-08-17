@@ -9,9 +9,9 @@ import kotlinx.coroutines.runBlocking
 
 class ColourBalanceEffect(override val type: EffectType,
                           override val name: String,
-                          private val valueRed: Int,
-                          private val valueGreen: Int,
-                          private val valueBlue: Int) : IEffect {
+                          private val valueRed: Double,
+                          private val valueGreen: Double,
+                          private val valueBlue: Double) : IEffect {
 
     override fun modifyPhoto(bitmap: Bitmap): Bitmap {
         val width = bitmap.width
@@ -24,7 +24,6 @@ class ColourBalanceEffect(override val type: EffectType,
         val rCoef = getCoefficientR()
         val gCoef = getCoefficientG()
         val bCoef = getCoefficientB()
-        Log.d("coef", "${rCoef} ${gCoef} ${bCoef}")
         runBlocking(Dispatchers.Default) {
             for (y in 0 until height) {
                 launch {
@@ -45,13 +44,16 @@ class ColourBalanceEffect(override val type: EffectType,
     }
 
     private fun getCoefficientR(): Int{
-        return -255 + (this.valueRed * 510)/1023
+        // 0 to 1 -> -255 to 255
+        return -255 + (this.valueRed * 510).toInt()
     }
     private fun getCoefficientG(): Int{
-        return -255 + (this.valueGreen * 510)/1023
+        // 0 to 1 -> -255 to 255
+        return -255 + (this.valueGreen * 510).toInt()
     }
     private fun getCoefficientB(): Int{
-        return -255 + (this.valueBlue * 510)/1023
+        // 0 to 1 -> -255 to 255
+        return -255 + (this.valueBlue * 510).toInt()
     }
 
 }
