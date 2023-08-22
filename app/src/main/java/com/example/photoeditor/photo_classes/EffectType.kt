@@ -6,9 +6,10 @@ enum class EffectType {
     SHARPNESS,
     COLOUR_BALANCE,
     GAMMA_CORRECTION,
-    CONTRAST;
+    CONTRAST,
+    GRAYSCALE;
 
     companion object {
-        val names = listOf("Jasność", "Rozmycie", "Ostrość", "Balans kolorów", "Korekcja gamma", "Kontrast")
+        val names = listOf("Jasność", "Rozmycie", "Ostrość", "Balans kolorów", "Korekcja gamma", "Kontrast", "Skala szarości")
     }
 }

@@ -76,6 +76,7 @@ abstract class EffectConfig : Fragment() {
                 EffectType.BRIGHTNESS,
                 EffectType.CONTRAST,
                 EffectType.BLUR,
+                EffectType.SHARPNESS,
                 EffectType.GAMMA_CORRECTION -> {
                     EffectConfigSingleSeekBar().apply{
                         arguments = Bundle().apply{
@@ -83,7 +84,7 @@ abstract class EffectConfig : Fragment() {
                         }
                     }
                 }
-                EffectType.SHARPNESS -> {
+                EffectType.GRAYSCALE -> {
                     EffectConfigSingleApply().apply{
                         arguments = Bundle().apply{
                             putInt(ARG_PARAM1, param1.ordinal)

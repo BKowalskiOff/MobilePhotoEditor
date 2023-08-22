@@ -54,6 +54,7 @@ class EffectsMenu : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.buttonGrayscale.setOnClickListener { effectSelectedListener.onEffectSelected(EffectType.GRAYSCALE) }
         binding.buttonBlur.setOnClickListener { effectSelectedListener.onEffectSelected(EffectType.BLUR) }
         binding.buttonBrightness.setOnClickListener { effectSelectedListener.onEffectSelected(EffectType.BRIGHTNESS) }
         binding.buttonContrast.setOnClickListener { effectSelectedListener.onEffectSelected(EffectType.CONTRAST) }

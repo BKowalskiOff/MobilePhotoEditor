@@ -26,6 +26,18 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/button_grayscale"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/menu_background_darker_grey"
+                android:paddingHorizontal="8sp"
+                android:layout_marginHorizontal="12sp"
+                android:textSize="16sp"
+                android:text="Skala szarości"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_button_text_dark_grey" />
+
+            <Button
                 android:id="@+id/button_brightness"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

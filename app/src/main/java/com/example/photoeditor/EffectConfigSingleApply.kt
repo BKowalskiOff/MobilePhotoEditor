@@ -58,6 +58,11 @@ class EffectConfigSingleApply : EffectConfig() {
         binding.buttonRevert.setOnClickListener {
             effectConfigRevertListener.onEffectConfigRevert()
         }
+        binding.buttonApply.setOnClickListener {
+            IEffectFactory().createEffect(param1!!)?.let {
+                effectConfigApplyListener.onEffectConfigApply(it)
+            }
+        }
 
     }
 

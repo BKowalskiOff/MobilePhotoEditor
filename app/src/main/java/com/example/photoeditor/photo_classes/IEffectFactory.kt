@@ -8,6 +8,7 @@ class IEffectFactory {
             EffectType.BLUR -> BlurEffect(type, "Blur", value)
             EffectType.GAMMA_CORRECTION -> GammaCorrectionEffect(type, "Gamma correction", value)
             EffectType.CONTRAST -> ContrastEffect(type, "Contrast", value)
+            EffectType.SHARPNESS -> SharpnessEffect(type, "Sharpness", value)
             else -> null
         }
     }
@@ -19,7 +20,7 @@ class IEffectFactory {
     }
     fun createEffect(type: EffectType): IEffect?{
         return when(type){
-            EffectType.SHARPNESS -> SharpnessEffect(type, "Sharpness")
+            EffectType.GRAYSCALE -> GrayscaleEffect(type, "Grayscale")
             else -> null
         }
     }
