@@ -7,11 +7,46 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/top_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@color/menu_background_dark_grey"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/button_change_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:backgroundTint="@null"
+            android:background="@drawable/bordered_button"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Inne zdjęcie"
+            app:cornerRadius="0dp"
+            app:strokeColor="@color/menu_background_dark_grey" />
+
+        <Button
+            android:id="@+id/button_save_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:backgroundTint="@null"
+            android:background="@drawable/bordered_button"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Zapisz"
+            app:cornerRadius="0dp" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="9"
         android:scaleType="fitXY"
         android:src="@drawable/empty_view"/>
 
@@ -19,7 +54,7 @@
         android:id="@+id/fcv_menu"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         tools:layout="@layout/fragment_effect_config_single_apply" />
 
 </LinearLayout>
