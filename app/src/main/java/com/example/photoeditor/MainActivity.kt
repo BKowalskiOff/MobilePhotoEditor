@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.webkit.URLUtil
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
@@ -84,11 +85,16 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
                     put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
                     put(MediaStore.MediaColumns.RELATIVE_PATH, "${Environment.DIRECTORY_DCIM}/PhotoEditor")
                 }
-                contentResolver.let { it ->
+                contentResolver.let {
                     it.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)?.let{ uri ->
-                        it.openOutputStream(uri)?.let{photo!!.preview!!.compress(Bitmap.CompressFormat.PNG,100, it)}
+                        it.openOutputStream(uri)?.let{ outputStream ->
+                            photo!!.preview?.let{bitmap ->
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                            }?: photo!!.original!!.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                        }
                     }
                 }
+                Toast.makeText(this, "Zapisano!", Toast.LENGTH_SHORT).show()
             })
             .setNegativeButton("ANULUJ", null)
         return builder.create()
