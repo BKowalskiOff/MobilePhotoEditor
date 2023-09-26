@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), FileSelectedListener, EffectSelectedLi
 
     private fun createSaveImageDialog(): AlertDialog {
         val builder = AlertDialog.Builder(this)
-        builder.setMessage("Utracisz wszystkie niezapisane zmiany!\nCzy chcesz kontynuować?")
+        builder.setMessage("Czy chcesz zapisać zdjęcie?")
             .setPositiveButton("ZAPISZ", DialogInterface.OnClickListener { dialogInterface, i ->
                 val name = "${UUID.randomUUID()}.png"
                 val contentValues = ContentValues().apply {
